@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Neo4jApp", "Neo4jApp\Neo4jApp.csproj", "{2352EA0F-B678-40C9-8CC6-91C2C62727EC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2352EA0F-B678-40C9-8CC6-91C2C62727EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2352EA0F-B678-40C9-8CC6-91C2C62727EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2352EA0F-B678-40C9-8CC6-91C2C62727EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2352EA0F-B678-40C9-8CC6-91C2C62727EC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {39A1AF42-D52A-47AC-81B2-E5CBDDCE3310}
+	EndGlobalSection
+EndGlobal

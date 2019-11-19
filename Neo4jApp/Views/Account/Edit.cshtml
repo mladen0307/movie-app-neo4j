@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model PersonModel
+@inject SignInManager<IdentityUser> signInManager
+@if (signInManager.IsSignedIn(User) && User.Identity.Name == @Model.Username)
+{
+    <div class="jumbotron">
+        <form asp-action="Edit" asp-controller="Account" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <input asp-for="Username" type="hidden" />
+           
+            <h3>Edit Profile:</h3>
+            <div class="form-group">
+                <label asp-for="FullName" class="col-md-2" control-label></label>
+                <div class="col-md-10">
+                    <input asp-for="FullName" class="form-control" />
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Bio" class="col-md-2" control-label></label>
+                <div class="col-md-10">
+                    <input asp-for="Bio" class="form-control" />
+                    <span asp-validation-for="Bio" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-primary" value="Submit" />
+                </div>
+            </div>
+        </form>
+</div>
+}

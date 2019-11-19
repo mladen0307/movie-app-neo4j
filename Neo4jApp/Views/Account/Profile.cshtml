@@ -1,0 +1,102 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model ProfileViewModel
+@inject SignInManager<IdentityUser> signInManager
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-">
+            <img src="~/images/img_avatar.png" alt="avatar image" class="mr-3 mt-3 rounded-circle" style="width:270px;">
+        </div>
+        <div class="col-">
+            <h4>Username: @Model.Person.Username</h4>
+            <h4>Full Name: @Model.Person.FullName</h4>
+            <p>Bio: @Model.Person.Bio</p>
+            @if (signInManager.IsSignedIn(User) && User.Identity.Name == @Model.Person.Username)
+            {
+                <a asp-action="Edit" asp-controller="Account" class="btn btn-primary">Edit profile</a>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        @if (Model.Reviews.Count > 0)
+        {
+            @foreach (var review in @Model.Reviews)
+            {
+                <div class="media border p-3">
+                    <a href="/Account/Profile/@review.Username"><img src="~/images/img_avatar.png" alt="avatar image" class="mr-3 mt-3 rounded-circle" style="width:60px;"></a>
+                    <div class="media-body">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <h4>@review.Username <small><i>@review.Date </i></small></h4>
+                                <p>@review.ReviewText</p>
+                                @if (review.Rating == 1)
+                                {
+                                    <span class="fa fa-star" style="color: #ffca08;"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                }
+                                @if (review.Rating == 2)
+                                {
+                                    <span class="fa fa-star" style="color: #ffca08;"></span>
+                                    <span class="fa fa-star" style="color: #ffca08;"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                }
+                                @if (review.Rating == 3)
+                                {
+                                    <span class="fa fa-star" style="color: #ffca08;"></span>
+                                    <span class="fa fa-star" style="color: #ffca08;"></span>
+                                    <span class="fa fa-star" style="color: #ffca08;"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                }
+                                @if (review.Rating == 4)
+                                {
+                                    <span class="fa fa-star" style="color: #ffca08;"></span>
+                                    <span class="fa fa-star" style="color: #ffca08;"></span>
+                                    <span class="fa fa-star" style="color: #ffca08;"></span>
+                                    <span class="fa fa-star" style="color: #ffca08;"></span>
+                                    <span class="fa fa-star"></span>
+                                }
+                                @if (review.Rating == 5)
+                                {
+                                    <span class="fa fa-star" style="color: #ffca08;"></span>
+                                    <span class="fa fa-star" style="color: #ffca08;"></span>
+                                    <span class="fa fa-star" style="color: #ffca08;"></span>
+                                    <span class="fa fa-star" style="color: #ffca08;"></span>
+                                    <span class="fa fa-star" style="color: #ffca08;"></span>
+                                }
+                            </div>
+                            <div class="card" style="width:180px;">
+                                <a href="/Movies/Details/@review.MovieId">
+                                    @if (review.Poster == "N/A")
+                                    {<img class="card-img-top" src="~/images/placeholder.png" alt="Card image" style="width:180px;">}
+                                    else
+                                    {<img class="card-img-top" src="@review.Poster" alt="Card image" style="width:180px;">}
+                                </a>
+                                <div class="card-body" style="text-align: center;  padding: 3px; padding-top:10px">
+                                    <h6 class="card-title">@review.Title (@review.Year)</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            }
+        }
+        else
+        {
+            <div class="jumbotron">
+                <h5><i>No reviews yet</i></h5>
+            </div>
+        }
+
+    </div>
+</div>
+

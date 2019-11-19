@@ -1,0 +1,58 @@
+﻿@model MoviesIndexModel
+<div class="row">
+    <div class="col-sm-12">
+        <h3>Search for a film:</h3>
+        <form asp-controller="Movies" asp-action="Search" method="get">
+            <input type="text" class="form-control" name="title">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <h4>Top Rated Movies</h4>
+</div>
+<div class="row">
+
+    @foreach (var movie in Model.TopMovies)
+    {
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+            <div class="card">
+
+                @if (@movie.Poster == "N/A")
+                {<img class="card-img-top" src="~/images/placeholder.png" alt="Card image">}
+                else
+                {<img class="card-img-top" src="@movie.Poster" alt="Card image">}
+
+                <div class="card-body" style="text-align: center;  padding: 3px; padding-top:10px">
+                    <h6 class="card-title">@movie.Title (@movie.Year)</h6>
+                    <a href="/Movies/Details/@movie.imdbID" class="btn btn-primary stretched-link">View Details</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="row">
+    <h4>Recommended Movies</h4>
+</div>
+<div class="row">
+
+    @foreach (var movie in Model.RecMovies)
+    {
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+            <div class="card">
+
+                @if (@movie.Poster == "N/A")
+                {<img class="card-img-top" src="~/images/placeholder.png" alt="Card image">}
+                else
+                {<img class="card-img-top" src="@movie.Poster" alt="Card image">}
+
+                <div class="card-body" style="text-align: center;  padding: 3px; padding-top:10px">
+                    <h6 class="card-title">@movie.Title (@movie.Year)</h6>
+                    <a href="/Movies/Details/@movie.imdbID" class="btn btn-primary stretched-link">View Details</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

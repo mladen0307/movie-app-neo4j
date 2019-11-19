@@ -1,0 +1,30 @@
+﻿@model MoviesSearchViewModel
+
+
+<div class="row">
+    @if (Model.Movies != null)
+    {
+        @foreach (var movie in Model.Movies)
+        {
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+                <div class="card">
+                    
+                  @if (@movie.Poster == "N/A")
+                   {<img class="card-img-top" src="~/images/placeholder.png" alt="Card image">}
+                   else
+                   {<img class="card-img-top" src="@movie.Poster" alt="Card image">}
+                  
+                    <div class="card-body" style="text-align: center;  padding: 3px; padding-top:10px">
+                        <h6 class="card-title">@movie.Title (@movie.Year)</h6>
+                        <a href="/Movies/Details/@movie.imdbID" class="btn btn-primary stretched-link">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <h3>No results found</h3>
+    }
+</div>
+
