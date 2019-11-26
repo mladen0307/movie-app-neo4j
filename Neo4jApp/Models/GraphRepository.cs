@@ -13,7 +13,7 @@ namespace Neo4jApp.Models
 
         public GraphRepository()
         {
-            client = new GraphClient(new Uri("http://localhost:7474/db/data"), "neo4j", "200kinte");
+            client = new GraphClient(new Uri("http://localhost:7474/db/data"), "neo4j", "admin1");
             client.Connect();
         }
 
