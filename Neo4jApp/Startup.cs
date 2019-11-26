@@ -30,6 +30,7 @@ namespace Neo4jApp
         {
             services.AddMvc();
             services.AddSingleton<IGraphRepository, GraphRepository>();
+            services.AddSingleton<IRedisRepository, RedisRepository>();
             services.AddHttpClient();
             services.AddHttpClient<IOmdbClient, OmdbClient>();
             services.AddDbContext<AppDbContext>

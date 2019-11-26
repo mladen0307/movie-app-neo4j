@@ -21,5 +21,6 @@ namespace Neo4jApp.Models
         List<PersonWithSim> FindKnn(string username, int k);
         List<MovieDetailsModel> TopRatedMovies(int n);
         List<MovieDetailsModel> RecommendedMovies(string username);
+        List<MovieDetailsModel> RecentlyViewedMovies(List<string> ids);
     }
 }

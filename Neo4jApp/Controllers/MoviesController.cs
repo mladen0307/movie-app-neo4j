@@ -15,11 +15,13 @@ namespace Neo4jApp.Controllers
     {
         private readonly IGraphRepository _graphRepository;
         private readonly IOmdbClient _omdbClient;
+        private readonly IRedisRepository _redisRepository;
 
-        public MoviesController(IGraphRepository graphRepository, IOmdbClient omdbClient)
+        public MoviesController(IGraphRepository graphRepository, IOmdbClient omdbClient, IRedisRepository redisRepository)
         {
             _graphRepository = graphRepository;
             _omdbClient = omdbClient;
+            _redisRepository = redisRepository;
         }
 
         public IActionResult Index()
@@ -27,10 +29,15 @@ namespace Neo4jApp.Controllers
             ClaimsPrincipal currentUser = this.User;
             string username = currentUser.Identity.Name;
 
+
+            List<string> recentMovies = _redisRepository.GetRecentlyVisited(username);
+           
+
             MoviesIndexModel model = new MoviesIndexModel()
             {
                 TopMovies = _graphRepository.TopRatedMovies(6),
-                RecMovies = _graphRepository.RecommendedMovies(username).Take(6).ToList()
+                RecMovies = _graphRepository.RecommendedMovies(username).Take(6).ToList(),
+                MoviesHistory = _graphRepository.RecentlyViewedMovies(recentMovies)
             };
 
             return View(model);
@@ -62,6 +69,12 @@ namespace Neo4jApp.Controllers
                 model.Movie = await _omdbClient.LoadMovieByImdbIDAsync(id);
                 _graphRepository.AddMovieDetails(model.Movie);
             }
+
+            ClaimsPrincipal currentUser = this.User;
+            string username = currentUser.Identity.Name;
+
+            _redisRepository.SaveVisit(username, id);
+
             return View(model);
         }
 

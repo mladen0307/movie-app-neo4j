@@ -10,5 +10,6 @@ namespace Neo4jApp.ViewModels
     {
         public List<MovieDetailsModel> TopMovies { get; set; }
         public List<MovieDetailsModel> RecMovies { get; set; }
+        public List<MovieDetailsModel> MoviesHistory { get; set; }
     }
 }

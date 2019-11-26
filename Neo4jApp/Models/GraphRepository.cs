@@ -13,7 +13,7 @@ namespace Neo4jApp.Models
 
         public GraphRepository()
         {
-            client = new GraphClient(new Uri("http://localhost:7474/db/data"), "neo4j", "admin1");
+            client = new GraphClient(new Uri("http://localhost:7474/db/data"), "neo4j", "200kinte");
             client.Connect();
         }
 
@@ -223,7 +223,15 @@ namespace Neo4jApp.Models
 
         }
 
+        public List<MovieDetailsModel> RecentlyViewedMovies(List<string> ids)
+        {
+            Dictionary<string, object> queryDict = new Dictionary<string, object>();
+            queryDict.Add("ids", ids);
 
-
+            var query = new Neo4jClient.Cypher
+                .CypherQuery("MATCH (m:Movie) WHERE m.imdbID IN {ids} return m", queryDict, CypherResultMode.Set);
+            List<MovieDetailsModel> movies = ((IRawGraphClient)client).ExecuteGetCypherResults<MovieDetailsModel>(query).ToList();
+            return movies;
+        }
     }
 }

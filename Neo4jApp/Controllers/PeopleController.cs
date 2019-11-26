@@ -23,7 +23,7 @@ namespace Neo4jApp.Controllers
         public IActionResult Index()
         {
             ClaimsPrincipal currentUser = this.User;
-            string username = currentUser.Identity.Name;
+            string username = currentUser.Identity.Name;            
             List<PersonWithSim> people = _graphRepository.FindKnn(username, 4);
             foreach (PersonWithSim person in people)
             {
